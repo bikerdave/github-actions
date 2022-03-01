@@ -13,11 +13,16 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      
-#      - name: Setup PHP
+
       - uses: shivammathur/setup-php@v2
         with:
           php-version: 7.3
 
-      # Runs a single command using the runners shell
+      # Install Composer dependencies
       - run: composer install -n --no-progress --no-dev --no-scripts --optimize-autoloader
+      
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      
+      - run: npm install
